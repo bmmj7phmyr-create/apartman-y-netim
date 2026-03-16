@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetici Girişi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            padding: 32px 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-bottom: 14px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        .btn {
+            border: none;
+            padding: 15px 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .error-box {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-header">
+            <div class="badge">Yönetici Girişi</div>
+            <h1>Su Fatura Yönetim Paneli</h1>
+            <p>Panele erişmek için ID ve şifrenizi giriniz.</p>
+        </div>
+
+        {% if hata_mesaji %}
+            <div class="error-box">{{ hata_mesaji }}</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div>
+                <label for="username">Yönetici ID</label>
+                <input type="text" id="username" name="username" placeholder="Yönetici ID" required>
+            </div>
+
+            <div>
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password" placeholder="Şifre" required>
+            </div>
+
+            <button type="submit" class="btn">Giriş Yap</button>
+        </form>
+
+        <div class="footer-note">
+            Yetkisiz erişim engellenmektedir.
+        </div>
+    </div>
+</body>
+</html>

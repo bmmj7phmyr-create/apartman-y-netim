@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fatura Bildirimi</title>
+    <style>
+        @font-face {
+            font-family: 'DejaVuSans';
+            src: url('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf');
+        }
+
+        body {
+            font-family: 'DejaVuSans';
+            font-size: 12px;
+            color: #000;
+            margin: 28px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 0 0 6px 0;
+        }
+
+        .header h2 {
+            font-size: 14px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .info-table,
+        .bill-table,
+        .total-box {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+        }
+
+        .info-table td,
+        .bill-table th,
+        .bill-table td,
+        .total-box td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .bill-table th {
+            background: #f2f2f2;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .warning {
+            margin-top: 24px;
+            padding: 12px;
+            border: 1px solid #000;
+            font-size: 12px;
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            text-align: right;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>YENİ DÖRT MEVSİM KOOPERATİFİ</h1>
+        <h2>Su Gider Bildirimi</h2>
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td><strong>Adı Soyadı</strong></td>
+            <td>{{ fatura.daire.ad_soyad }}</td>
+            <td><strong>Bina No</strong></td>
+            <td>{{ fatura.daire.bina_no }}</td>
+        </tr>
+        <tr>
+            <td><strong>Daire No</strong></td>
+            <td>{{ fatura.daire.daire_no }}</td>
+            <td><strong>Tarih</strong></td>
+            <td>{{ fatura.tarih|default:"-" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Dönem</strong></td>
+            <td colspan="3">{{ ay_yil }}</td>
+        </tr>
+    </table>
+
+    <table class="bill-table">
+        <thead>
+            <tr>
+                <th>Önceki Değer</th>
+                <th>Son Değer</th>
+                <th>Fark</th>
+                <th>Birim Fiyat</th>
+                <th>Tüketim Tutarı</th>
+                <th>Hizmet Bedeli</th>
+                <th>Eski Borç</th>
+                <th>Toplam Bedel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ onceki_endeks }}</td>
+                <td>{{ simdiki_endeks }}</td>
+                <td>{{ tuketilen_metrekup }}</td>
+                <td>{{ birim_fiyat }} TL</td>
+                <td>{{ tutar }} TL</td>
+                <td>{{ hizmet_bedeli }} TL</td>
+                <td>{{ eski_borc }} TL</td>
+                <td><strong>{{ toplam_tutar }} TL</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="total-box">
+        <tr>
+            <td class="bold">Toplam Borç</td>
+            <td class="right bold">{{ toplam_tutar }} TL</td>
+        </tr>
+    </table>
+
+    <div class="warning">
+        <strong>Uyarı:</strong> Ödemelerin her ayın üçüne kadar ödenmesi zorunludur. Aksi durumda kesme işlemi uygulanacaktır.
+    </div>
+
+    <div class="footer-note">
+        Yeni Dört Mevsim Kooperatifi Yönetimi
+    </div>
+
+</body>
+</html>
