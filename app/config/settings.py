@@ -31,9 +31,13 @@ DATABASES = {
 SECRET_KEY = 'django-insecure-*o=d=i7__=5)q0#=b8@gc#amj6r8%10o-a-(o&jfr)&z783rrh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://apartman-y-netim.onrender.com",
+]
 
 
 # Application definition
